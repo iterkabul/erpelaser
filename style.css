@@ -1,0 +1,1849 @@
+/* =========================================
+   1. RESET & SETUP DASAR
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Sangat penting agar padding tidak merusak lebar elemen */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Menggunakan font yang kamu panggil di HTML */
+    line-height: 1.6;
+    background-color: #f9f9f9;
+}
+
+/* PENGATURAN KONTAINER */
+.container {
+    max-width: 1200px;
+    /* Lebar maksimal konten di layar desktop */
+    margin: 0 auto;
+    /* Membuat konten berada tepat di tengah layar */
+    padding: 0 20px;
+    /* Memberi jarak aman di kiri-kanan saat dibuka di HP */
+}
+
+/* MENGHILANGKAN GARIS BAWAH PADA LINK */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* MENGHILANGKAN TITIK PADA DAFTAR MENU */
+ul {
+    list-style: none;
+}
+
+/* =========================================
+   2. HEADER UTAMA (GENERAL)
+   ========================================= */
+.main-header {
+    width: 100%;
+    position: relative;
+}
+
+/* =========================================
+   3. TOP HEADER (LOGO & SEARCH)
+   ========================================= */
+/* --- GAYA UNTUK HEADER ATAS --- */
+.top-header {
+    background-color: #ffffff;
+    /* Warna putih bersih */
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    /* Garis tipis untuk memisahkan dengan menu */
+}
+
+/* Mengatur Flexbox agar Logo di kiri dan Search di kanan */
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    /* Ini kunci agar elemen terpencar ke ujung kiri & kanan */
+    align-items: center;
+    /* Menjaga agar logo & search tetap sejajar tinggi secara vertikal */
+}
+
+/* Menata area Logo */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* Memberi ruang yang pas antara gambar logo dan teks */
+}
+
+.logo-img {
+    height: 50px;
+    /* Sesuaikan tinggi agar sejajar dengan tinggi font */
+    width: auto;
+}
+
+.brand-name {
+    font-size: 1.8rem;
+    /* Sedikit diperbesar agar menonjol */
+    font-weight: 600;
+    color: #312e66;
+    font-style: italic;
+    /* Membuat tulisan menjadi miring */
+    letter-spacing: -1px;
+    /* Merapatkan huruf agar mirip gaya logo laser */
+    font-family: 'Poppins', sans-serif;
+    /* Pastikan font tetap Poppins sesuai setup awal */
+}
+
+/* Menata area Pencarian */
+.search-form {
+    display: flex;
+    min-width: 350px;
+    /* Agar kolom pencarian tidak terlalu pendek */
+}
+
+.search-input {
+    flex: 1;
+    /* Mengambil sisa ruang yang tersedia di form */
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    /* Tumpul di sisi kiri saja */
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #312e66;
+    /* Warna berubah saat diklik agar interaktif */
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background-color: #3a93f8;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    /* Tumpul di sisi kanan saja */
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.search-btn:hover {
+    background-color: #2d23bb;
+    /* Warna sedikit gelap saat kursor menempel */
+}
+
+/* Penyesuaian Responsif Awal untuk Top Header */
+@media (max-width: 768px) {
+    .header-flex {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .search-form {
+        min-width: 100%;
+    }
+}
+
+/* =========================================
+   4. BOTTOM HEADER (NAVIGATION MENU)
+   ========================================= */
+.bottom-header {
+    background-color: #3a93f8;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+/* Class ini akan dipicu oleh JavaScript saat scroll */
+.bottom-header.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.4s ease;
+    /* Efek muncul yang halus */
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Mengatur daftar menu agar berjejer ke samping */
+.nav-menu {
+    display: flex;
+    justify-content: flex-start;
+    /* Menu mulai dari kiri */
+    align-items: center;
+}
+
+/* Mengatur setiap item list (li) */
+.nav-menu li {
+    position: relative;
+    /* Dasar jika nanti ingin membuat dropdown */
+}
+
+/* Mengatur gaya teks dan area klik link */
+.nav-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: #ffffff;
+    /* Teks putih agar terbaca di latar gelap */
+    font-size: 0.95rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    /* Membuat teks jadi huruf kapital semua agar rapi */
+    letter-spacing: 1px;
+    /* Memberi jarak antar huruf agar elegan */
+    transition: all 0.3s ease;
+}
+
+/* Efek saat kursor menempel (Hover) */
+.nav-menu a:hover {
+    background-color: #2d23bb;
+    /* Biru yang lebih tua agar terlihat kontras */
+    color: #fff;
+}
+
+/* Sembunyikan tombol hamburger di layar desktop */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 10px;
+}
+
+/* Pastikan elemen bar memiliki transisi */
+.menu-toggle .bar {
+    display: block;
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+    transition: all 0.3s ease-in-out;
+    /* Menambahkan efek halus pada semua perubahan */
+}
+
+/* Efek Animasi saat Menu Active (Menjadi X) */
+
+/* Garis atas: berputar 45 derajat dan turun ke bawah */
+.menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+/* Garis tengah: menghilang (transparan) */
+.menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+/* Garis bawah: berputar -45 derajat dan naik ke atas */
+.menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Responsif: Layar 768px ke bawah */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        margin: 0 auto;
+        /* Tambahan pengaman agar benar-benar di tengah */
+    }
+
+
+    .bottom-header .container {
+        display: flex;
+        justify-content: center;
+        /* Memposisikan isi ke tengah secara horizontal */
+        align-items: center;
+    }
+
+    .nav-menu {
+        display: none;
+        /* Sembunyikan menu default */
+        flex-direction: column;
+        width: 100%;
+        background-color: #75bcfff8;
+        position: absolute;
+        top: 100%;
+        /* Muncul tepat di bawah header */
+        left: 0;
+        z-index: 999;
+        justify-content: center;
+        /* Menu ke tengah di HP */
+    }
+
+    /* Saat class 'active' ditambahkan lewat JS, menu muncul */
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        text-align: center;
+        border-bottom: none;
+    }
+
+    .nav-menu a {
+        padding: 15px;
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    /* Keadaan menu tertutup */
+    .nav-list {
+        display: none;
+        /* atau transform: translateX(-100%) tergantung desainmu */
+    }
+
+    /* Keadaan menu terbuka saat ada class .active */
+    .nav-list.active {
+        display: flex;
+    }
+}
+
+
+
+/* =========================================
+   SECTION HERO (SLIDER & FEATURES)
+   ========================================= */
+/* Slider tetap bersih tanpa teks menutupi */
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    /* Sesuaikan tinggi slider */
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f5f5f5;
+}
+
+.slide.active {
+    opacity: 1;
+    /* Tampilkan hanya slide yang aktif */
+}
+
+/* Tombol Navigasi panah slider */
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.3);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: #3a93f8;
+}
+
+.prev {
+    left: 20px;
+}
+
+.next {
+    right: 20px;
+}
+
+/* 2. Area Teks Fitur (3 Kolom) */
+.hero-features {
+    padding: 50px 0;
+    background-color: #ffffff;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    /* Jarak antar kolom */
+}
+
+.hero-content {
+    flex: 1;
+    /* Membuat 3 kolom memiliki lebar yang sama seimbang */
+    padding: 30px;
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.hero-content:hover {
+    transform: translateY(-10px);
+    /* Efek melayang saat kursor menempel */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    border-color: #3a93f8;
+}
+
+.hero-content h2 {
+    font-size: 1.5rem;
+    color: #3a93f8;
+    /* Warna biru sesuai keinginanmu */
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.hero-content p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Tombol Aksi (CTA) */
+.cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3a93f8;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #2d23bb;
+    /* Biru gelap saat hover */
+}
+
+/* =========================================
+   RESPONSIF HERO (UNTUK HP)
+   ========================================= */
+@media (max-width: 768px) {
+    .hero-slider {
+        aspect-ratio: 16 / 9;
+        height: 200px;
+    }
+
+    .slide {
+        background-size: contain;
+        background-position: center center;
+    }
+
+    .prev,
+    .next {
+        padding: 10px 15px;
+        font-size: 18px;
+    }
+
+    .features-grid {
+        flex-direction: column;
+        /* Ubah dari samping ke bawah (vertikal) */
+        gap: 20px;
+    }
+
+    .hero-content {
+        padding: 25px;
+    }
+}
+
+/* =========================================
+   SECTION PRODUK
+   ========================================= */
+.products-section {
+    padding: 40px 0;
+    background-color: #f4f4f4;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+/* Garis bawah kecil di judul */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #3a93f8;
+    margin: 10px auto 0;
+}
+
+/* Grid System */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Gaya Kartu Produk */
+.product-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff5722;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.product-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    /* Gambar tetap proporsional */
+    display: block;
+}
+
+.product-info {
+    padding: 20px;
+    text-align: left;
+}
+
+.product-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.product-desc {
+    font-size: 0.8rem;
+    color: #777;
+    margin-bottom: 15px;
+    height: 40px;
+    /* Menjaga tinggi teks deskripsi tetap sama */
+    overflow: hidden;
+}
+
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3a93f8;
+    margin-bottom: 15px;
+}
+
+.btn-buy {
+    display: block;
+    text-align: center;
+    padding: 8px;
+    background: transparent;
+    color: #3a93f8;
+    border: 2px solid #3a93f8;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.btn-buy:hover {
+    background: #3a93f8;
+    color: #fff;
+}
+
+/* --- RESPONSIF PRODUK (FIXED) --- */
+
+/* Tampilan Desktop & Laptop (Tetap 4 Kolom) */
+@media (min-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Tampilan Smartphone & Tablet (2 Kolom) */
+@media (max-width: 768px) {
+    .products-grid {
+        /* Memaksa 2 kolom di semua ukuran layar di bawah 768px */
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px;
+        /* Jarak antar kartu sedikit dipersempit agar muat */
+        padding: 10px;
+    }
+
+    .product-card {
+        margin-bottom: 5px;
+    }
+
+    .product-img {
+        height: 150px;
+        /* Tinggi gambar disamakan agar rapi */
+        object-fit: cover;
+    }
+
+    .product-info h3 {
+        font-size: 0.9rem;
+        /* Ukuran teks judul diperkecil agar tidak berantakan */
+    }
+
+    .product-desc {
+        /* Menyembunyikan deskripsi di HP agar kartu tidak terlalu tinggi */
+        display: none;
+    }
+
+    .product-price {
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+}
+
+/* HAPUS atau KOMENTARI aturan (max-width: 480px) yang lama agar tidak kembali ke 1 kolom */
+
+/* =========================================
+   SECTION KATEGORI
+   ========================================= */
+.category-section {
+    padding: 40px 0;
+    background-color: #ffffff;
+    /* Putih agar kontras dengan section produk yang abu-abu */
+}
+
+.category-grid {
+    display: grid;
+    /* Kita gunakan 4 kolom untuk layar besar, sama seperti permintaanmu sebelumnya */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.category-card {
+    text-align: center;
+    padding: 20px 20px;
+    border-radius: 20px;
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.category-card:hover {
+    background-color: #3a93f8;
+    /* Berubah jadi biru logo saat dihover */
+    border-color: #3a93f8;
+    transform: translateY(-5px);
+}
+
+.category-icon {
+    width: 50px;
+    height: 50px;
+    background: #f0f7ff;
+    border-radius: none;
+    /* Membuat ikon berbentuk lingkaran */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.category-card:hover .category-icon {
+    background: #ffffff;
+    /* Lingkaran dalam jadi putih saat hover */
+}
+
+.category-icon img {
+    width: 80px;
+    height: auto;
+}
+
+.category-card h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+.category-card span {
+    font-size: 0.85rem;
+    color: #888;
+    transition: 0.3s;
+}
+
+/* Warna teks berubah putih saat card biru (hover) */
+.category-card:hover h3,
+.category-card:hover span {
+    color: #ffffff;
+}
+
+/* --- RESPONSIF KATEGORI --- */
+@media (max-width: 1024px) {
+    .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+        /* Tetap 4 kolom di laptop sesuai keinginanmu */
+    }
+}
+
+@media (max-width: 768px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 kolom di HP */
+    }
+}
+
+/* =========================================
+   SECTION PROMO
+   ========================================= */
+.promo-section {
+    padding: 40px 0 80px 0;
+    background-color: #ffffff;
+}
+
+.promo-banner {
+    background: linear-gradient(135deg, #3a93f8 0%, #2d23bb 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+.promo-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.promo-tag {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.promo-content h2 {
+    font-size: 2.5rem;
+    margin: 20px 0 15px 0;
+    line-height: 1.2;
+}
+
+.promo-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* Tombol di dalam Promo */
+.promo-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-promo-main {
+    background: #ffffff;
+    color: #3a93f8;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-promo-main:hover {
+    background: #f0f0f0;
+    transform: scale(0.95);
+}
+
+.btn-promo-sub {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-promo-sub:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0.95);
+}
+
+.promo-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+}
+
+.promo-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+    transform: rotate(5deg);
+    /* Memberi sedikit gaya miring */
+}
+
+/* --- RESPONSIF PROMO --- */
+@media (max-width: 992px) {
+    .promo-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .promo-image {
+        margin-top: 40px;
+        justify-content: center;
+    }
+
+    .promo-buttons {
+        justify-content: center;
+    }
+
+    .promo-content h2 {
+        font-size: 2rem;
+    }
+}
+
+/* SECTION TESTIMONI */
+/* =========================================
+   SECTION TESTIMONI (SINGLE SLIDE)
+   ========================================= */
+
+.testimonial-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.testimonial-slider {
+    overflow: hidden;
+    /* Sembunyikan kartu lain yang di luar area pandang */
+    width: 100%;
+    max-width: 800px;
+    /* Ukuran maksimal agar teks tidak terlalu melebar di laptop */
+    margin: 40px auto;
+    position: relative;
+}
+
+.testimonial-wrapper {
+    display: flex;
+    /* Geser menggunakan persentase (100% per slide) */
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testi-card {
+    min-width: 100%;
+    /* Memaksa satu kartu per layar di semua perangkat */
+    background: #ffffff;
+    padding: 50px 30px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    /* Bayangan halus */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Area Foto Profil */
+.testi-profile {
+    margin-bottom: 20px;
+}
+
+.testi-profile img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #3a93f8;
+    box-shadow: 0 4px 10px rgba(58, 147, 248, 0.2);
+}
+
+/* Rating Bintang */
+.testi-rating {
+    color: #ffc107;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+/* Teks Komentar */
+.testi-card p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 25px;
+    max-width: 600px;
+}
+
+/* Nama Pelanggan */
+.testi-card h4 {
+    color: #312e66;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+/* Navigasi Tombol */
+.testi-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.testi-nav button {
+    background: #3a93f8;
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.testi-nav button:hover {
+    background: #2d23bb;
+    transform: scale(1.1);
+}
+
+/* Penyesuaian Responsif untuk Layar Sangat Kecil (HP) */
+@media (max-width: 480px) {
+    .testi-card {
+        padding: 30px 20px;
+    }
+
+    .testi-card p {
+        font-size: 1rem;
+    }
+}
+
+/* =========================================
+   SECTION TENTANG KAMI
+   ========================================= */
+
+.about-section {
+    padding: 10px 0;
+    background-color: #fff;
+}
+
+.about-flex {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    /* Agar responsif di HP */
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.about-image .img-main {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 20px 20px 0px #3a93f8;
+    /* Aksen dekoratif kotak di belakang foto */
+}
+
+.experience-badge {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background: #312e66;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.experience-badge span {
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+}
+
+.about-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-content .subtitle {
+    color: #3a93f8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.about-content p {
+    margin: 20px 0;
+    color: #666;
+}
+
+.about-features {
+    margin: 30px 0;
+}
+
+.feature-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.feature-item .icon {
+    background: #eef6ff;
+    color: #3a93f8;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.feature-item h4 {
+    color: #312e66;
+    margin-bottom: 5px;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 2px solid #3a93f8;
+    color: #3a93f8;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #3a93f8;
+    color: white;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    .about-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .feature-item {
+        text-align: left;
+    }
+
+    .about-image .img-main {
+        box-shadow: 10px 10px 0px #3a93f8;
+    }
+}
+
+/* =========================================
+   SECTION FOOTER
+   ========================================= */
+
+.main-footer {
+    background-color: #312e66;
+    /* Biru gelap senada dengan header */
+    color: #ffffff;
+    padding: 60px 0 0 0;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px 20px;
+    display: grid;
+    /* Membagi menjadi 4 kolom dengan proporsi kolom pertama lebih lebar */
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+}
+
+/* Kolom Identitas Logo */
+
+
+.footer-desc {
+    line-height: 1.8;
+    color: #d1d1d1;
+    margin-bottom: 20px;
+}
+
+.social-icons a {
+    display: block;
+    margin-bottom: 10px;
+    color: #3a93f8;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #ffffff;
+    padding-left: 5px;
+}
+
+/* Kolom Navigasi & Link */
+.footer-column h4 {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: #3a93f8;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: #d1d1d1;
+    transition: 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: #3a93f8;
+    padding-left: 8px;
+}
+
+/* Kolom Detail Kontak */
+.contact-detail p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #d1d1d1;
+}
+
+.contact-detail strong {
+    color: #ffffff;
+}
+
+/* Footer Bottom (Copyright) */
+.footer-bottom {
+    background-color: #25234d;
+    /* Warna lebih gelap untuk kontras */
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bottom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.legal-links a {
+    margin-left: 20px;
+    color: #888;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.legal-links a:hover {
+    color: #ffffff;
+}
+
+/* =========================================
+   RESPONSIF FOOTER (FIXED 2 KOLOM)
+   ========================================= */
+
+/* Untuk Tablet dan HP (Tetap 2 Kolom) */
+@media (max-width: 992px) {
+    .footer-container {
+        display: grid;
+        /* Pastikan menggunakan grid */
+        grid-template-columns: repeat(2, 1fr);
+        /* Tetap 2 kolom */
+        gap: 30px;
+    }
+}
+
+/* Pengaturan Khusus HP agar tidak berantakan dalam 2 kolom */
+@media (max-width: 576px) {
+    .footer-container {
+        /* Menghapus paksaan 1 kolom, tetap gunakan 2 kolom dari atas */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 15px 30px 15px;
+    }
+
+    .footer-column h4 {
+        font-size: 1rem;
+        /* Mengecilkan judul sedikit agar tidak makan tempat */
+        margin-bottom: 15px;
+    }
+
+    .footer-desc,
+    .footer-column ul li a,
+    .contact-detail p {
+        font-size: 0.8rem;
+        /* Mengecilkan teks agar pas di kolom yang sempit */
+    }
+
+    /* Bagian bawah footer tetap tumpuk (Center) agar rapi */
+    .bottom-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .legal-links {
+        margin-top: 10px;
+    }
+
+    .legal-links a {
+        margin: 0 5px;
+        font-size: 0.75rem;
+    }
+}
+
+
+
+/* =========================================
+   TOMBOL SCROLL TO TOP
+   ========================================= */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #3a93f8;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    /* Sembunyi di awal */
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top:hover {
+    background-color: #312e66;
+    transform: translateY(-5px);
+    /* Efek melompat kecil saat di-hover */
+}
+
+.scroll-to-top.show {
+    display: flex;
+    /* Muncul saat class 'show' ditambahkan via JS */
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Sembunyikan di layar sangat kecil agar tidak menutupi konten penting */
+@media (max-width: 480px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* --- FITUR NAVIGASI TAMBAHAN --- */
+
+/* Membuat scroll layar menjadi halus */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Memberi jarak agar konten tidak tertutup header saat scroll */
+section {
+    scroll-margin-top: 80px;
+}
+
+/* Style untuk menu yang sedang aktif/dikunjungi */
+.nav-menu a.active-link {
+    color: #3a93f8 !important;
+    /* Warna biru sesuai tema */
+    font-weight: 600;
+    position: relative;
+}
+
+/* Opsional: Menambah garis bawah kecil pada menu aktif */
+.nav-menu a.active-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #3a93f8;
+}
+
+/* =========================================
+   * --- TOMBOL WHATSAPP FLOATING --- *
+   ========================================= */
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    /* Di kiri agar tidak tabrakan dengan tombol Scroll to Top */
+    background-color: #25d366;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    /* Sangat tinggi agar selalu di atas elemen lain */
+    transition: all 0.3s ease;
+}
+
+.whatsapp-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.whatsapp-float img {
+    width: 25px;
+    height: 25px;
+}
+
+.whatsapp-float span {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Efek Hover */
+.whatsapp-float:hover {
+    background-color: #128c7e;
+    transform: scale(1.05);
+    color: white;
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        left: 20px;
+        padding: 10px;
+    }
+
+    .whatsapp-float span {
+        display: none;
+        /* Sembunyikan tulisan di HP agar hemat ruang, hanya ikon */
+    }
+}
+
+/* =========================================
+   --- STYLE HALAMAN GALERI --- *
+   ========================================= */
+
+/* Container Seksi Galeri */
+.gallery-section {
+    margin-top: 20px;
+    margin-bottom: 60px;
+    /* Jarak antar kategori judul */
+}
+
+.gallery-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #312e66;
+    position: relative;
+}
+
+/* Pengaturan Grid */
+.gallery-grid {
+    display: grid;
+    /* Laptop/Desktop: 4 kolom sama besar */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+/* Responsif: Tampilan Tablet/HP */
+@media (max-width: 992px) {
+    .gallery-grid {
+        /* Tablet: Tetap 2 atau 3 kolom jika mau, tapi kita set 2 untuk amannya */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        /* HP: 2 kolom sesuai permintaanmu */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        /* Perkecil jarak antar foto di HP */
+    }
+
+    .gallery-item {
+        height: 180px;
+        /* Perkecil tinggi kotak di HP agar proposional */
+    }
+
+    .gallery-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* =========================================
+ --- HALAMAN PRODUK KAMI --- 
+ =========================================*/
+/* 
+   PRODUCT PAGE LAYOUT
+   ========================================= */
+.product-page-padding {
+    padding: 60px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.product-header h2 {
+    font-size: 1.5rem;
+    color: #312e66;
+    margin-bottom: 10px;
+}
+
+.product-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* 
+   GRID SYSTEM (Mobile First: 2 Kolom)
+   ========================================= */
+.product-grid {
+    display: grid;
+    /* Secara default di HP: 2 kolom */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/*
+   PRODUCT CARD STYLES
+   ========================================= */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    /* Menghilangkan garis bawah link */
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Wadah Gambar */
+.product-img-container {
+    width: 100%;
+    height: 180px;
+    /* Ukuran default di layar kecil */
+    overflow: hidden;
+}
+
+.product-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-card:hover img {
+    transform: scale(1.1);
+    /* Efek zoom halus saat di-hover */
+}
+
+/* Badge (Terlaris/Baru) */
+.badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #ff4757;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    z-index: 2;
+    text-transform: uppercase;
+}
+
+/* Info Produk */
+.product-info {
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.product-info h3 {
+    font-size: 1rem;
+    color: #312e66;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.view-detail {
+    font-size: 0.8rem;
+    color: #e67e22;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* 
+   MEDIA QUERIES (RESPONSIVE)
+   ========================================= */
+
+/* Tablet (Layar di atas 768px) */
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* Tetap 2 kolom sesuai permintaan */
+        gap: 25px;
+    }
+
+    .product-img-container {
+        height: 250px;
+        /* Gambar lebih besar di layar lebar */
+    }
+}
+
+/* Laptop/Desktop (Layar di atas 1024px) */
+@media (min-width: 1024px) {
+    .product-grid {
+        /* Berubah menjadi 4 kolom di layar laptop */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+
+    .product-info h3 {
+        font-size: 1.15rem;
+    }
+}
+
+/* =========================================
+ --- HAALAMAN TENTANG KAMI --- 
+ =========================================*/
+.about-container {
+    padding: 60px 20px;
+}
+
+.about-hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.about-hero h1 {
+    font-size: 2.8rem;
+    color: #312e66;
+    margin-bottom: 10px;
+}
+
+.about-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-text h3 {
+    color: #312e66;
+    margin: 20px 0 10px;
+    font-size: 1.5rem;
+}
+
+.about-text ul {
+    margin-top: 15px;
+}
+
+.about-text li {
+    margin-bottom: 10px;
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.about-image img {
+    width: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsif HP */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column-reverse;
+        /* Gambar di atas teks saat di HP */
+    }
+
+    .about-hero h1 {
+        font-size: 2rem;
+    }
+}
+
+/* --- DETAIL PRODUCT STYLES --- */
+.detail-page-padding {
+    padding: 40px 5%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.breadcrumb {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.breadcrumb a {
+    color: #312e66;
+    text-decoration: none;
+}
+
+.detail-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* Default Mobile */
+    gap: 40px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Gambar Detail */
+.detail-image {
+    flex: 1;
+}
+
+.detail-image img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+/* Info Detail */
+.detail-info {
+    flex: 1;
+}
+
+.category-tag {
+    color: #e67e22;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.detail-info h1 {
+    font-size: 2rem;
+    color: #312e66;
+    margin: 10px 0;
+}
+
+.detail-price {
+    font-size: 1.5rem;
+    color: #2ecc71;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.detail-desc h3,
+.detail-spec h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+.detail-spec ul {
+    list-style: none;
+    padding: 0;
+}
+
+.detail-spec li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+/* Tombol WA Besar */
+.btn-wa-large {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 30px;
+    transition: 0.3s;
+}
+
+.btn-wa-large:hover {
+    background: #128c7e;
+    transform: scale(1.02);
+}
+
+/* Responsif untuk Layar Besar (Desktop) */
+@media (min-width: 768px) {
+    .detail-wrapper {
+        flex-direction: row;
+        /* Berdampingan di Desktop */
+        padding: 40px;
+    }
+}
+
+/* --- GALLERY PRODUK DETAIL STYLES --- */
+.main-img-container {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.main-img-container img {
+    width: 100%;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 foto kecil berjajar */
+    gap: 10px;
+}
+
+.thumb {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.thumb:hover {
+    opacity: 1;
+}
+
+/* Penanda foto yang sedang aktif dilihat */
+.thumb.active {
+    border-color: #e67e22;
+    opacity: 1;
+}
+
+/* Responsif: Jika di HP thumbnail bisa lebih kecil */
+@media (max-width: 480px) {
+    .thumb {
+        height: 60px;
+    }
+}
